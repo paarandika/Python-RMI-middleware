@@ -2,8 +2,9 @@ import requests
 import json
 
 class ObjSkeleton:
-    def __init__(self, attrib):
-        self.__dict__ = attrib
+    def __init__(self, attrib=None):
+        if attrib!=None:
+            self.__dict__ = attrib
 
 def parseJSONtoObj(dic):
     try:
@@ -13,5 +14,10 @@ def parseJSONtoObj(dic):
 
 def parseObjtoJSON(obj):
         return json.dumps(obj, default=lambda o: o.__dict__)
+
+def callMethod(url,jsonString):
+    headers = {'Content-type': 'application/json', 'Accept': 'text/plain'}
+    r = requests.post(url, jsonString, headers=headers)
+    return parseJSONtoObj(r.json())
 
 ##1

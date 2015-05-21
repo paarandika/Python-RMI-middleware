@@ -2,9 +2,9 @@ import requests
 import json
 
 class ObjSkeleton:
-    def __init__(self, attrib):
-        self.__dict__ = attrib
-
+    def __init__(self, attrib=None):
+        if attrib!=None:
+            self.__dict__ = attrib
 
 base_url="http://localhost:8080/punk2"
 
@@ -22,9 +22,11 @@ def callMethod(url,jsonString):
     r = requests.post(url, jsonString, headers=headers)
     return parseJSONtoObj(r.json())
 
-callMethod(base_url,"{\"name\":\"rand\"}")
+#callMethod(base_url,"{\"name\":\"rand\"}")
 
 def punk2(arg1, arg2):
-    temp=ObjSkeleton()
-    temp.arg1=arg1
-    temp.arg2=arg2
+    obj=ObjSkeleton()
+    obj.arg1=arg1
+    obj.arg2=arg2
+    return parseJSONtoObj(callMethod(base_url,parseObjtoJSON(obj)))
+print punk2(2,3).arg1

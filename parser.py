@@ -29,17 +29,33 @@ while True:
         else:
             outLocal.write("base_url=\""+tokens[1]+"\"")
             break
-
+url=""
 for line in file:
     lineNumber+=1
     if line!="":
         tokens=line.strip().split("(")
         token1=tokens[0].split()
+
         if token1[0]=="def":
             args=tokens[1].replace("):","").split(",")
             funcName=token1[1]
+            url="/"+funcName
+            #outLocal.write("\n\ndef "+funcName+" ( obj ) :")
+            outLocal.write("\n\n"+line)
+            outLocal.write("\tobj=ObjSkeleton()")
+            for arg in args:
+                arg=arg.strip()
+                outLocal.write("\n\t"+"obj."+arg+"="+arg)
+                #outLocal.write("\n\t"+arg+"=obj."+arg)
             print funcName
             print args
+
+        elif token1[0]=="return":
+            print url
+            outLocal.write("\n\treturn parseJSONtoObj(callMethod(base_url+\""+url+"\",parseObjtoJSON(obj)))")
+        else:
+            pass
+            #outLocal.write("\n\t"+line.strip())
 
 
 

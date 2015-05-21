@@ -5,8 +5,9 @@ def myFunc(temp):
     return 22.4
 
 @route("/punk2")
-def myFunc2(temp):
-    return 23
+def punk2(temp):
+    print temp.arg1
+    return temp
 
 if __name__ == '__main__':
     from BaseHTTPServer import HTTPServer
