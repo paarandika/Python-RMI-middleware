@@ -31,7 +31,7 @@ try:
     url=""
     for line in file:
         lineNumber+=1
-        if line!="":
+        if line.strip()!="":
             tokens=line.strip().split("(")
             token1=tokens[0].split()
 

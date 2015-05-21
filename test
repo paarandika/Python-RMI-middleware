@@ -1,4 +1,12 @@
 base_url=http://localhost:8080
-def punk2(arg1, arg2):
+def add(arg1, arg2):
     d=arg1+arg2
+    return d
+
+def sub(arg1, arg2):
+    d=arg1-arg2
+    return d
+
+def mul(name, age):
+    d=arg1*arg2
     return d
