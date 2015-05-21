@@ -7,8 +7,8 @@ except:
 try:
     file = open(filePath,"r")
     localRef = open("localref.xrnd","r")
-    outLocal=open("local1.py","w")
-    outRemote=open("remote1.py","w")
+    outLocal=open("local.py","w")
+    outRemote=open("remote.py","w")
 
     for line in localRef:
         if line=="##1":
