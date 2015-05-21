@@ -1,4 +1,8 @@
 base_url=http://localhost:8080
+
+class C:
+    pass
+
 def add(arg1, arg2):
     d=arg1+arg2
     return d
@@ -7,6 +11,11 @@ def sub(arg1, arg2):
     d=arg1-arg2
     return d
 
-def mul(name, age):
+def mul(arg1, arg2):
     d=arg1*arg2
+    return d
+
+def user(name, age):
+    d=C()
+    d.k=name
     return d

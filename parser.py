@@ -29,6 +29,7 @@ try:
                 outLocal.write("base_url=\""+tokens[1]+"\"")
                 break
     url=""
+    inFunc=False
     for line in file:
         lineNumber+=1
         if line.strip()!="":
@@ -36,6 +37,7 @@ try:
             token1=tokens[0].split()
 
             if token1[0]=="def":
+                inFunc=True
                 args=tokens[1].replace("):","").split(",")
                 funcName=token1[1]
                 url="/"+funcName
@@ -50,6 +52,9 @@ try:
             elif token1[0]=="return":
                 outLocal.write("\n\treturn parseJSONtoObj(callMethod(base_url+\""+url+"\",parseObjtoJSON(obj)))")
                 outRemote.write("\n\t"+line.strip())
+                inFunc=False
+            elif not inFunc :
+                outRemote.write("\n"+line.replace("\n",""))
             else:
                 outRemote.write("\n\t"+line.strip())
     print "Parsed the interface definition successfully"
